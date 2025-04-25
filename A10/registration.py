@@ -13,7 +13,7 @@ code to someone else), the case shall be submitted to the Office of the Dean of
 Students. Academic penalties up to and including an F in the course are likely.
 
 UT EID 1:AD54489
-UT EID 2:
+UT EID 2:SM76875
 """
 
 # TODO: Delete this import if you choose not to use it. Delete this comment when you are done.
@@ -392,7 +392,16 @@ class Graph:
              if self.vertices[i].depth == -1:
                  path = []
                  dfs(i, path)
+    
 
+    def cycle_check(self, vertex_index, visited):
+        visited.append(vertex_index)
+        neighbors = self.get_adjacent_vertices(vertex_index)
+        for neighbor in neighbors:
+            if neighbor in visited or self.cycle_check(neighbor, visited):
+                return True
+        return False
+ 
 
 
     # TODO: Modify this method. You may delete this comment when you are done.
@@ -402,7 +411,12 @@ class Graph:
 
         post: returns True if there is a cycle and False otherwise.
         """
-
+        if len(self.vertices) > 0:
+            neighbors = self.get_adjacent_vertices(0)
+            for n in neighbors:
+                visited = [0]
+                if self.cycle_check(n, visited):
+                    return True
         return False
 
 
