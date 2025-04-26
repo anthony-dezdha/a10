@@ -399,7 +399,9 @@ class Graph:
         neighbors = self.get_adjacent_vertices(vertex_index)
         for neighbor in neighbors:
             if neighbor in visited or self.cycle_check(neighbor, visited):
+                print()
                 return True
+        visited.pop()
         return False
  
 
@@ -473,7 +475,8 @@ def main():
 
     # read the vertices and add them into the graph
     for _ in range(num_vertices):
-        graph.add_vertex(sys.stdin.readline().rstrip('\n'))
+        vertex = sys.stdin.readline().rstrip('\n')
+        graph.add_vertex(vertex)
 
     # read the number of edges
     num_edges = int(sys.stdin.readline().rstrip('\n'))
